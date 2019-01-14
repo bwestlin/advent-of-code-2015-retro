@@ -1,0 +1,18 @@
+[package]
+name = "advent-of-code-2015-retro"
+version = "0.1.0"
+authors = ["Björn Westlin <bwestlin@gmail.com>"]
+
+[dependencies]
+regex = "1"
+lazy_static = "1.1"
+time = "0.1"
+
+[features]
+default = []
+print = []
+
+[lib]
+name = "utils"
+path = "src/lib.rs"
+
