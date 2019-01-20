@@ -15,4 +15,4 @@ $(TARGET): $(TARGET).c
 	$(CC) $(CFLAGS) -o $(TARGET).bin $(TARGET).c
 
 clean:
-	$(RM) $(TARGET)
+	$(RM) $(TARGET).bin
