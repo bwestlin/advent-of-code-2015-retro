@@ -19,4 +19,4 @@ path = "src/lib.rs"
 
 [[bin]]
 name = "day01"
-path = "src/day01/day01.rs"
+path = "src/day01.rs"

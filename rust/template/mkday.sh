@@ -7,9 +7,8 @@ if [ -z "$DAY" ]
     exit 1
 fi
 
-DST="src/day$DAY/day$DAY.rs"
-mkdir -p "src/day$DAY/"
-sed "s/xDAYx/day$DAY/g" < template/day.rs > "$DST"
+DST="src/day$DAY.rs"
+cp template/day.rs "$DST"
 echo "$DST created"
 
 echo "
