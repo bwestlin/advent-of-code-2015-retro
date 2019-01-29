@@ -2,6 +2,7 @@ extern crate regex;
 #[macro_use] extern crate lazy_static;
 extern crate utils;
 
+use std::env;
 use std::cmp;
 use std::collections::HashSet;
 use std::collections::HashMap;
@@ -14,31 +15,26 @@ use std::fs::File;
 use regex::Regex;
 use utils::*;
 
+type Input = Vec<String>;
 
-fn part1(input: &Vec<String>) -> i32 {
+fn part1(input: &Input) -> i32 {
     0
 }
 
-fn part2(input: &Vec<String>) -> i32 {
+fn part2(input: &Input) -> i32 {
     0
 }
 
-fn main() -> Result<(), Box<Error>> {
-    measure_exec(|| {
-        let result = part1(&input()?);
-        println!("Part1 result: {}", result);
-        Ok(())
-    })?;
-    measure_exec(|| {
-        let result = part2(&input()?);
-        println!("Part2 result: {}", result);
-        Ok(())
-    })?;
-    Ok(())
+fn main() {
+    measure(|| {
+        let input = input().expect("Input failed");
+        println!("Part1: {}", part1(&input));
+        println!("Part2: {}", part2(&input));
+    });
 }
 
-fn input() -> io::Result<Vec<String>> {
-    let f = File::open("src/xDAYx/input")?;
+fn input() -> io::Result<Input> {
+    let f = File::open(env::args().skip(1).next().expect("No input file given"))?;
     let f = BufReader::new(f);
     Ok(f.lines().map(|l| l.unwrap()).collect())
 }
@@ -50,7 +46,7 @@ mod tests {
     const INPUT: &'static str =
        "";
 
-    fn as_input(s: &str) -> Vec<String> {
+    fn as_input(s: &str) -> Input {
         s.split('\n').map(|s| s.trim().into()).collect()
     }
 
