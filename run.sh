@@ -12,7 +12,7 @@ if [ -z "$DAY" ]; then
     exit 1
 fi
 
-INPUT=input/day$DAY/input
+INPUT=input/day$DAY
 
 function run_in {
     if [ ! -d "$1" ]; then

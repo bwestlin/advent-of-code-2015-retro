@@ -16,7 +16,7 @@ else
 fi
 
 if [ -z "$INPUT" ]; then
-  INPUT="../input/day$DAY/input"
+  INPUT="../input/day$DAY"
 fi
 
 RUST_BACKTRACE=1 cargo run --features="$FEATURES" --bin "day$DAY" --release "$INPUT"
