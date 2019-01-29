@@ -52,6 +52,7 @@ function perf_in {
 if [ $LANG == "all" ]; then
     for i in * ; do
         if [ -d "$i" ] && [ "$i" != "input" ]; then
+            echo ""
             perf_in "$i"
         fi
     done

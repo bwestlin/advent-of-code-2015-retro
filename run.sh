@@ -51,6 +51,7 @@ function run_in {
 if [ $LANG == "all" ]; then
     for i in * ; do
         if [ -d "$i" ] && [ "$i" != "input" ]; then
+            echo ""
             run_in "$i"
         fi
     done
