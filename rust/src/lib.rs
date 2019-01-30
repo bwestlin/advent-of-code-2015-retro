@@ -8,5 +8,5 @@ pub fn measure<F>(f: F) where F: FnOnce() -> () {
     f();
 
     let dur_ns = precise_time_ns() - start;
-    println!("It took: {}ms", dur_ns / 1_000_000);
+    println!("It took: {}ms", dur_ns as f64 / 1_000_000.0);
 }
