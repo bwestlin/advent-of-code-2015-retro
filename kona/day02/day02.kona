@@ -1,0 +1,26 @@
+/ Indexes for splits on "x" eg. 2 4
+s:{ (?({"x"=x}'x) * !#x) @ 1 2 }
+/ s "8x7x6" -> 1 3
+
+/ Pick the 3 values separated by x and parse them into numbers
+p:{ 0$' ((0, ,//{(x,x+1)}' s[x]) _ x) @ 0 2 4 }
+/ p "8x7x6" -> 8 7 6
+
+/ The input
+i:p'(0:`input)
+
+/ Wrapping needed
+wn:{ s:x*x[2 0 1]; (+/2*'s) + s@*<s }
+/ wn 2 3 4 -> 58
+
+/ Ribbon needed
+rn:{ (+/{x+x}'(x@<x)@(0 1)) + (*/x) }
+/ rn 2 3 4 -> 34
+
+/ Part 1
++/wn'i
+
+/ Part 2
++/rn'i
+
+\\
