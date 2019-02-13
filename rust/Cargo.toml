@@ -8,6 +8,7 @@ regex = "1"
 lazy_static = "1.1"
 time = "0.1"
 md5 = "*"
+rayon = "*"
 
 [features]
 default = []

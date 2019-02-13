@@ -1,34 +1,61 @@
 extern crate utils;
 extern crate md5;
+extern crate rayon;
 
 use std::env;
 use std::io::{self, BufReader};
 use std::io::prelude::*;
 use std::fs::File;
+use rayon::prelude::*;
 use utils::*;
 
 type Input = String;
 
-fn find_advent_coin(input: &Input, leading_zeroes: usize) -> i32 {
-    for i in 1.. {
-        let digest = md5::compute(format!("{}{}", input, i));
-        for j in 0..leading_zeroes {
-            if ((0x0F << ((j + 1) % 2) * 4) & digest[j >> 1]) > 0 {
-                break;
-            }
-            if j == leading_zeroes - 1 {
-                return i;
-            }
+fn is_advent_coin(input: &Input, leading_zeroes: usize, i: usize) -> bool {
+    let digest = md5::compute(format!("{}{}", input, i));
+    for j in 0..leading_zeroes {
+        if ((0x0F << ((j + 1) % 2) * 4) & digest[j >> 1]) > 0 {
+            break;
+        }
+        if j == leading_zeroes - 1 {
+            return true;
+        }
+    }
+    false
+}
+
+fn find_advent_coin(input: &Input, leading_zeroes: usize) -> usize {
+    let n_per_thread = 10000;
+    let n_threads = 8;
+
+    for i in (1..).step_by(n_per_thread * n_threads) {
+        let ranges: Vec<_> = (0..n_threads)
+            .map(|ti| (i + (ti * n_per_thread))..(i + (ti * n_per_thread) + n_per_thread))
+            .collect();
+        let maybe_coins: Vec<usize> = ranges.into_par_iter()
+            .map(|r| {
+                for j in r {
+                    if is_advent_coin(input, leading_zeroes, j) {
+                        return Some(j);
+                    }
+                }
+                None
+            })
+            .flatten()
+            .collect();
+
+        if maybe_coins.len() > 0 {
+            return *maybe_coins.iter().min().unwrap();
         }
     }
     0
 }
 
-fn part1(input: &Input) -> i32 {
+fn part1(input: &Input) -> usize {
     find_advent_coin(input, 5)
 }
 
-fn part2(input: &Input) -> i32 {
+fn part2(input: &Input) -> usize {
     find_advent_coin(input, 6)
 
 }
