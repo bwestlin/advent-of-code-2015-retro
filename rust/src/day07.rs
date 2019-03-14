@@ -3,7 +3,7 @@ extern crate utils;
 use std::env;
 use std::error;
 use std::fmt;
-use std::collections::BTreeMap;
+use std::collections::HashMap;
 use std::collections::VecDeque;
 use std::str::FromStr;
 use std::io::{self, BufReader};
@@ -80,8 +80,8 @@ impl FromStr for Part {
     }
 }
 
-fn resolve_wire(input: &Input, wire: &str, preset_wires: &BTreeMap<String, u16>) -> u16 {
-    let mut wires: BTreeMap<String, u16> = preset_wires.clone();
+fn resolve_wire(input: &Input, wire: &str, preset_wires: &HashMap<String, u16>) -> u16 {
+    let mut wires: HashMap<String, u16> = preset_wires.clone();
     let wires = &mut wires;
 
     let mut parts: VecDeque<_> = input.iter().collect();
@@ -129,11 +129,11 @@ fn resolve_wire(input: &Input, wire: &str, preset_wires: &BTreeMap<String, u16>)
 
 
 fn part1(input: &Input) -> u16 {
-    resolve_wire(input, "a", &BTreeMap::new())
+    resolve_wire(input, "a", &HashMap::new())
 }
 
 fn part2(input: &Input, part1: u16) -> u16 {
-    let mut preset: BTreeMap<String, u16> = BTreeMap::new();
+    let mut preset: HashMap<String, u16> = HashMap::new();
     preset.insert("b".into(), part1);
     resolve_wire(input, "a", &preset)
 }
