@@ -57,12 +57,11 @@ fn calories_mix(input: &Input, distribution: &Vec<usize>) -> i32 {
     distribution.iter().enumerate().map(|(i, &d)| input[i].calories * d as i32 ).sum::<i32>()
 }
 
-fn find_best_mix(input: &Input, distribution: &Vec<usize>, sum: usize, calories: i32) -> (i32, i32) {
-    let dsum = distribution.iter().sum::<usize>();
+fn find_best_mix(input: &Input, distribution: &Vec<usize>, to_distribute: usize, calories: i32) -> (i32, i32) {
 
     if distribution.len() == input.len() - 1 {
         let mut distribution = distribution.clone();
-        distribution.push(sum - dsum);
+        distribution.push(to_distribute);
         let score = score_mix(input, &distribution);
         (score, if calories_mix(input, &distribution) == calories { score } else { 0 })
     } else {
@@ -72,9 +71,9 @@ fn find_best_mix(input: &Input, distribution: &Vec<usize>, sum: usize, calories:
         let mut best_s1 = 0;
         let mut best_s2 = 0;
 
-        for i in 0..=(sum - dsum) {
+        for i in 0..=to_distribute {
             distribution[didx] = i;
-            let (s1, s2) = find_best_mix(input, &distribution, sum, calories);
+            let (s1, s2) = find_best_mix(input, &distribution, to_distribute - i, calories);
             if s1 > best_s1 {
                 best_s1 = s1;
             }
