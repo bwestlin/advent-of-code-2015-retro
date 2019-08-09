@@ -11,7 +11,7 @@ type Input = Vec<String>;
 
 fn is_nice(s: &str) -> bool {
     lazy_static! {
-        static ref vowels: Vec<char> = vec!['a', 'e', 'i', 'o', 'u'];
+        static ref WOWELS: Vec<char> = vec!['a', 'e', 'i', 'o', 'u'];
     }
 
     let mut n_vovels = 0;
@@ -19,7 +19,7 @@ fn is_nice(s: &str) -> bool {
     let mut lchr = None;
 
     for c in s.chars() {
-        if vowels.contains(&c) {
+        if WOWELS.contains(&c) {
             n_vovels += 1;
         }
 
