@@ -102,7 +102,7 @@ fn find_next_password(current: &String) -> String {
 }
 
 fn main() {
-    measure_times(100, || {
+    measure(|| {
         let input = input().expect("Input failed");
         let part1 = find_next_password(&input);
         println!("Part1: {}", part1);
@@ -149,7 +149,6 @@ mod tests {
     #[test]
     fn test_find_next_password() {
         assert_eq!(find_next_password(&"abcdefgh".to_string()), "abcdffaa".to_string());
-        // assert_eq!(find_next_password(&"ghijklmn".to_string()), "ghjaabcc".to_string());
         assert_eq!(find_next_password(&"hepxcrrq".to_string()), "hepxxyzz".to_string());
         assert_eq!(find_next_password(&"hepxxyzz".to_string()), "heqaabcc".to_string());
     }

@@ -89,7 +89,7 @@ impl Seating {
     }
 }
 
-// Iterator of pssible seating permutations based on the Steinhaus–Johnson–Trotter algorithm
+// Iterator of possible seating permutations based on the Steinhaus–Johnson–Trotter algorithm
 impl Iterator for Seating {
     type Item = Vec<usize>;
 
