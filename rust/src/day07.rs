@@ -171,13 +171,16 @@ mod tests {
         s.split('\n').map(|s| s.trim().parse::<Part>().unwrap()).collect()
     }
 
-    // #[test]
-    // fn test_part1() {
-    //     assert_eq!(part1(&as_input(INPUT)), 1337);
-    // }
-
-    // #[test]
-    // fn test_part2() {
-    //     assert_eq!(part2(&as_input(INPUT)), 1337);
-    // }
+    #[test]
+    fn test_resolve_wire() {
+        let input = as_input(INPUT);
+        assert_eq!(resolve_wire(&input, "d", &HashMap::new()), 72);
+        assert_eq!(resolve_wire(&input, "e", &HashMap::new()), 507);
+        assert_eq!(resolve_wire(&input, "f", &HashMap::new()), 492);
+        assert_eq!(resolve_wire(&input, "g", &HashMap::new()), 114);
+        assert_eq!(resolve_wire(&input, "h", &HashMap::new()), 65412);
+        assert_eq!(resolve_wire(&input, "i", &HashMap::new()), 65079);
+        assert_eq!(resolve_wire(&input, "x", &HashMap::new()), 123);
+        assert_eq!(resolve_wire(&input, "y", &HashMap::new()), 456);
+    }
 }
