@@ -4,7 +4,6 @@ use std::env;
 use std::cmp::Ordering;
 use std::collections::BinaryHeap;
 use std::collections::HashSet;
-use std::collections::VecDeque;
 use std::io::{self, BufReader};
 use std::io::prelude::*;
 use std::fs::File;
@@ -63,16 +62,10 @@ fn replace(seq: &Sequence, replacement: &Replacement) -> Vec<Sequence> {
 
 fn part1(input: &Input) -> usize {
     let mut found = HashSet::new();
-    let mut queue = VecDeque::new();
-    queue.push_back(input.molecule.clone());
 
     for r in input.replacements.iter() {
-        let repl = replace(&input.molecule, r);
-        for r in repl {
-            let rc = r.clone();
-            if found.insert(r) {
-                queue.push_back(rc);
-            }
+        for r in replace(&input.molecule, r) {
+            found.insert(r);
         }
     }
 
@@ -125,7 +118,7 @@ fn part2(input: &Input) -> usize {
 }
 
 fn main() {
-    measure_times(100, || {
+    measure(|| {
         let input = input().expect("Input failed");
         println!("Part1: {}", part1(&input));
         println!("Part2: {}", part2(&input));
