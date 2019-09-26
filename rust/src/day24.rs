@@ -1,5 +1,5 @@
 extern crate utils;
-//extern crate rayon;
+extern crate rayon;
 
 use std::env;
 use std::io::{self, BufReader};
@@ -96,11 +96,9 @@ fn part2(input: &Input) -> u64 {
 fn main() {
     measure(|| {
         let input = input().expect("Input failed");
-        println!("Part1: {}", part1(&input));
-        println!("Part2: {}", part2(&input));
 
-        // rayon::join(|| println!("Part1: {}", part1(&input)),
-        //             || println!("Part2: {}", part2(&input)));
+        rayon::join(|| println!("Part1: {}", part1(&input)),
+                    || println!("Part2: {}", part2(&input)));
     });
 }
 
